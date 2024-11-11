@@ -1,1 +1,18 @@
 /* Write your CSS here */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  background-color: #0f172a;
+}
+.teamLogo {
+  height: 150px;
+}
+.red {
+  color: #e31a1a;
+}
+.green {
+  color: #18ed66;
+}

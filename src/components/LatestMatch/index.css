@@ -1,1 +1,19 @@
 /* Write your CSS here */
+.mainContent {
+  background-color: #1e293b;
+  padding: 20px;
+  border: 1px white solid;
+  border-radius: 10px;
+  margin: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.teamLogo {
+  height: 250px;
+  margin: 20px;
+}

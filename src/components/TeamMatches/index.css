@@ -9,10 +9,17 @@
   justify-content: center;
   min-height: 100vh;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
 .teamBanner {
   width: 100%;
 }
-ul{
+ul {
   list-style: none;
   margin: 0px;
   padding: 0px;

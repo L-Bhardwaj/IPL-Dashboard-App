@@ -3,13 +3,17 @@
 import './index.css'
 import {Component} from 'react'
 
+import Loader from 'react-loader-spinner'
+
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
 
 class TeamMatches extends Component {
   constructor(props) {
     super(props)
-    this.state = {teamDetails: {}}
+    this.state = {teamDetails: {}, isLoading: true}
   }
 
   componentDidMount() {
@@ -21,11 +25,12 @@ class TeamMatches extends Component {
     const {params} = match
     const {id} = params
     console.log(match, params, id)
+
     const response = await fetch(`https://apis.ccbp.in/ipl/${id}`)
     const data = await response.json()
-    console.log(data)
+    console.log(data.latest_match_details)
 
-    const latestMatchdetails = {
+    const latestMatchDetails = {
       umpires: data.latest_match_details.umpires,
       manOfTheMatch: data.latest_match_details.man_of_the_match,
       id: data.latest_match_details.id,
@@ -54,34 +59,46 @@ class TeamMatches extends Component {
 
     const formattedData = {
       teamBannerUrl: data.team_banner_url,
-      latestMatchDetails: latestMatchdetails,
+      latestMatchDetails,
       recentMatches,
     }
 
-    this.setState({teamDetails: formattedData})
+    this.setState({teamDetails: formattedData, isLoading: false})
   }
 
   render() {
-    const {teamDetails} = this.state
+    const {teamDetails, isLoading} = this.state
     const {teamBannerUrl, latestMatchDetails, recentMatches} = teamDetails
     return (
       <div className="main">
-        <div className="container">
-          <div>
-            <img className="teamBanner" src={teamBannerUrl} alt="team banner" />
+        {isLoading ? (
+          <div data-testid="loader">
+            <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
           </div>
+        ) : (
+          <div>
+            <div className="container">
+              <div>
+                <img
+                  className="teamBanner"
+                  src={teamBannerUrl}
+                  alt="team banner"
+                />
+              </div>
 
-          <div>
-            <LatestMatch details={latestMatchDetails} />
+              <div>
+                <LatestMatch details={latestMatchDetails} />
+              </div>
+              <div>
+                <ul>
+                  {recentMatches.map(each => (
+                    <MatchCard key={each.id} details={each} />
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div>
-            <ul>
-              {recentMatches.map(each => (
-                <MatchCard key={each.id} details={each} />
-              ))}
-            </ul>
-          </div>
-        </div>
+        )}
       </div>
     )
   }

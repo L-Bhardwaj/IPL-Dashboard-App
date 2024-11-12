@@ -6,7 +6,7 @@ const LatestMatch = props => {
   const {
     umpires,
     result,
-    manOfTheMAtch,
+    manOfTheMatch,
     date,
     venue,
     competingTeam,
@@ -19,8 +19,8 @@ const LatestMatch = props => {
     <div className="mainContent">
       <div className="container">
         <div>
-          <h3>{competingTeam}</h3>
-          <h4>{date}</h4>
+          <p>{competingTeam}</p>
+          <p>{date}</p>
           <p>{venue}</p>
           <p>{result}</p>
         </div>
@@ -38,7 +38,7 @@ const LatestMatch = props => {
         <h3>Second Innings</h3>
         <p>{secondInnings}</p>
         <h3>Man Of The Match</h3>
-        <p>{manOfTheMAtch}</p>
+        <p>{manOfTheMatch}</p>
         <h3>Umpires</h3>
         <p>{umpires}</p>
       </div>
